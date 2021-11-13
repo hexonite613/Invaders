@@ -65,7 +65,6 @@ public class Cooldown {
 		this.time = System.currentTimeMillis();
 		if (this.variance != 0)
 			this.duration = (this.milliseconds - this.variance)
-					+ (int) (Math.random()
-							* (this.milliseconds + this.variance));
+					+ (int) (Math.random() * (this.milliseconds + this.variance));
 	}
 }

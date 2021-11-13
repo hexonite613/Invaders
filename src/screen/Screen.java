@@ -4,10 +4,7 @@ import java.awt.Insets;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import engine.Cooldown;
-import engine.Core;
-import engine.DrawManager;
-import engine.InputManager;
+import engine.*;
 
 /**
  * Implements a generic screen.
@@ -22,6 +19,8 @@ public class Screen {
 
 	/** Draw Manager instance. */
 	protected DrawManager drawManager;
+	/** File Manager instance. */
+	protected FileManager fileManager;
 	/** Input Manager instance. */
 	protected InputManager inputManager;
 	/** Application logger. */
@@ -42,6 +41,11 @@ public class Screen {
 	protected boolean isRunning;
 	/** What kind of screen goes next. */
 	protected int returnCode;
+
+	/** Background Music */
+	protected Audio backgroundMusic;
+	/** Hit sound effect */
+	protected Audio hitSound;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -81,6 +85,8 @@ public class Screen {
 	public int run() {
 		this.isRunning = true;
 
+		backgroundMusic = new Audio("res/audio", true);
+		hitSound = new Audio("res/audio", false);
 		while (this.isRunning) {
 			long time = System.currentTimeMillis();
 
