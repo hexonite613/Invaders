@@ -161,12 +161,59 @@ public final class Core {
 				LOGGER.info("Closing score screen.");
 				break;
 			case 3:
+				do {
+					currentScreen = new SettingScreen(width, height, FPS);
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT +
+							" setting screen at " + FPS + "fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing setting screen.");
+					switch (returnCode) {
+						case 2:
+							// window mode setting
+//							currentScreen = new WindowSettingScreen(width, height, FPS);
+//							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+//									+ " window setting screen at " + FPS + " fps.");
+//							returnCode = frame.setScreen(currentScreen);
+//							LOGGER.info(frame.setScreen(currentScreen));
+							break;
+						case 3:
+							// difficulty setting
+							currentScreen = new DifficultyScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " difficulty screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Difficulty screen.");
+							switch (returnCode) {
+								case 5:
+									LOGGER.info("NORMAL MODE");
+									break;
+								case 6:
+									LOGGER.info("HARD MODE");
+									break;
+								case 7:
+									LOGGER.info("EXPERT MODE");
+									break;
+								default:
+									break;
+							}
+							break;
+						case 4:
+							// sound volume setting
+							break;
+						case 0:
+							returnCode = 1;
+							break;
+						default:
+							break;
+					}
+
+				} while (returnCode != 1);
 				// Game Setting
-				currentScreen = new SettingScreen(width, height, FPS);
+				currentScreen = new TitleScreen(width, height, FPS);
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT +
-						" setting screen at " + FPS + "fps.");
+						" Title at " + FPS + "fps.");
 				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing setting screen.");
+				LOGGER.info("Closing Title screen.");
 				break;
 			case 4:
 				// High scores.
@@ -176,7 +223,6 @@ public final class Core {
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing high score screen.");
 				break;
-
 			default:
 				break;
 			}

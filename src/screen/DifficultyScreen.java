@@ -1,11 +1,17 @@
 package screen;
 
+import java.awt.event.KeyEvent;
+
 import engine.Cooldown;
 import engine.Core;
 
-import java.awt.event.KeyEvent;
-
-public class SettingScreen extends Screen {
+/**
+ * Implements the title screen.
+ *
+ * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
+ *
+ */
+public class DifficultyScreen extends Screen {
 
     /** Milliseconds between changes in user selection. */
     private static final int SELECTION_TIME = 200;
@@ -23,11 +29,11 @@ public class SettingScreen extends Screen {
      * @param fps
      *            Frames per second, frame rate at which the game is run.
      */
-    public SettingScreen(final int width, final int height, final int fps) {
+    public DifficultyScreen(final int width, final int height, final int fps) {
         super(width, height, fps);
 
-        // Defaults to top setting selection.
-        this.returnCode = 2;
+        // Defaults to normal level.
+        this.returnCode = 5;
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
         this.selectionCooldown.reset();
     }
@@ -62,9 +68,8 @@ public class SettingScreen extends Screen {
                 nextMenuItem();
                 this.selectionCooldown.reset();
             }
-            if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
-                    this.isRunning = false;
-            }
+            if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+                this.isRunning = false;
         }
     }
 
@@ -72,45 +77,20 @@ public class SettingScreen extends Screen {
      * Shifts the focus to the next menu item.
      */
     private void nextMenuItem() {
-        if (this.returnCode == 4)
-            this.returnCode = 0;
-        else if (this.returnCode == 0)
-            this.returnCode = 2;
-        else
-            this.returnCode++;
+        if (this.returnCode == 7)
+            this.returnCode = 5;
+        else this.returnCode++;
     }
 
     /**
      * Shifts the focus to the previous menu item.
      */
     private void previousMenuItem() {
-        if (this.returnCode == 0)
-            this.returnCode = 4;
-        else if (this.returnCode == 2)
-            this.returnCode = 0;
+        if (this.returnCode == 5)
+            this.returnCode = 7;
         else
             this.returnCode--;
     }
-
-    /**
-     * Shifts the focus to the left detail menu item.
-     */
-//    private void leftLevel() {
-//        if (this.returnCode <= 5)
-//            this.returnCode = 5;
-//        else
-//            this.returnCode--;
-//    }
-//
-//    /**
-//     * Shifts the focus to the right detail menu item.
-//     */
-//    private void rightLevel() {
-//        if (this.returnCode >= 7)
-//            this.returnCode = 7;
-//        else
-//            this.returnCode++;
-//    }
 
     /**
      * Draws the elements associated with the screen.
@@ -118,10 +98,9 @@ public class SettingScreen extends Screen {
     private void draw() {
         drawManager.initDrawing(this);
 
-        drawManager.drawSettingTitle(this, this.returnCode);
-        drawManager.drawSettingMenu(this, this.returnCode);
+        drawManager.drawDifficultTitle(this);
+        drawManager.drawDifficultyMenu(this, this.returnCode);
 
         drawManager.completeDrawing(this);
     }
 }
-
