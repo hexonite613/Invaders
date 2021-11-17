@@ -17,11 +17,15 @@ import screen.*;
  * 
  */
 public final class Core {
-
+	/** Number to resize*/
+	public static int sizingNum = 1;
+	/**font size*/
+	public static float regularFontSize = 14f;
+	public static float regularBigFontSize = 24f;
 	/** Width of current screen. */
-	private static final int WIDTH = 448;
+	private static final int WIDTH = 448*sizingNum;
 	/** Height of current screen. */
-	private static final int HEIGHT = 520;
+	private static final int HEIGHT = 520*sizingNum;
 	/** Max fps of current screen. */
 	private static final int FPS = 60;
 
@@ -245,6 +249,13 @@ public final class Core {
 					LOGGER.info("Closing setting screen.");
 					switch (returnCode) {
 						case 2:
+							sizingNum=2;
+							frame = new Frame(448*sizingNum, 520*sizingNum);
+							DrawManager.getInstance().setFrame(frame);//896 1040
+							width = frame.getWidth();
+							height = frame.getHeight();
+							returnCode=1;
+							LOGGER.info("Big size window");
 							// window mode setting
 //							currentScreen = new WindowSettingScreen(width, height, FPS);
 //							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT

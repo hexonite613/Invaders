@@ -27,15 +27,15 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/** Initial position in the y-axis. */
 	private static final int INIT_POS_Y = 100;
 	/** Distance between ships. */
-	private static final int SEPARATION_DISTANCE = 40;
+	private static final int SEPARATION_DISTANCE = 40*Core.sizingNum;
 	/** Proportion of C-type ships. */
 	private static final double PROPORTION_C = 0.2;
 	/** Proportion of B-type ships. */
 	private static final double PROPORTION_B = 0.4;
 	/** Lateral speed of the formation. */
-	private static final int X_SPEED = 8;
+	private static final int X_SPEED = 8*Core.sizingNum;
 	/** Downwards speed of the formation. */
-	private static final int Y_SPEED = 4;
+	private static final int Y_SPEED = 4*Core.sizingNum;
 	/** Speed of the bullets shot by the members. */
 	private static final int BULLET_SPEED = 4;
 	/** Proportion of differences between shooting times. */
