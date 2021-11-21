@@ -5,7 +5,7 @@ import java.awt.Color;
 import engine.DrawManager.SpriteType;
 
 /**
- * Implements a generic game entity.
+ * Implements a generic game entity.z
  * 
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
  * 

@@ -72,7 +72,7 @@ public class SettingScreen extends Screen {
      * Shifts the focus to the next menu item.
      */
     private void nextMenuItem() {
-        if (this.returnCode == 4)
+        if (this.returnCode == 3)
             this.returnCode = 0;
         else if (this.returnCode == 0)
             this.returnCode = 2;
@@ -85,7 +85,7 @@ public class SettingScreen extends Screen {
      */
     private void previousMenuItem() {
         if (this.returnCode == 0)
-            this.returnCode = 4;
+            this.returnCode = 3;
         else if (this.returnCode == 2)
             this.returnCode = 0;
         else

@@ -1,5 +1,6 @@
 package engine;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
@@ -28,7 +29,6 @@ public final class Core {
 	private static final int HEIGHT = 520*sizingNum;
 	/** Max fps of current screen. */
 	private static final int FPS = 60;
-
 	/** Max lives. */
 	private static final int MAX_LIVES = 3;
 	/** Levels between extra life. */
@@ -60,7 +60,7 @@ public final class Core {
 			new GameSettings(8, 7, 20, 1300);
 
 
-	/**Hard level*/
+	/** Hard level */
 	/** Difficulty hard settings for level 1. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_1 =
 			new GameSettings(5, 4, 30, 1500);
@@ -108,7 +108,7 @@ public final class Core {
 	private static final GameSettings SETTINGS_Expert_LEVEL_7 =
 			new GameSettings(8, 7, 2, 500);
 
-	
+
 	/** Frame to draw the screen on. */
 	private static Frame frame;
 	/** Screen currently shown. */
@@ -126,7 +126,6 @@ public final class Core {
 	private static Handler fileHandler;
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
-
 
 	/**
 	 * Test implementation.
@@ -157,6 +156,7 @@ public final class Core {
 		DrawManager.getInstance().setFrame(frame);
 		int width = frame.getWidth();
 		int height = frame.getHeight();
+
 
 		/**Default level setting*/
 		gameSettings_Default = new ArrayList<GameSettings>();
@@ -213,7 +213,7 @@ public final class Core {
 					
 					currentScreen = new GameScreen(gameState,
 							gameSettings_Default.get(gameState.getLevel() - 1),
-							bonusLife, width, height, FPS);
+							bonusLife, width, height, (int)(FPS * currentScreen.getRatio()));
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " game screen at " + FPS + " fps.");
 					frame.setScreen(currentScreen);
@@ -257,11 +257,36 @@ public final class Core {
 							returnCode=1;
 							LOGGER.info("Big size window");
 							// window mode setting
-//							currentScreen = new WindowSettingScreen(width, height, FPS);
-//							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-//									+ " window setting screen at " + FPS + " fps.");
-//							returnCode = frame.setScreen(currentScreen);
-//							LOGGER.info(frame.setScreen(currentScreen));
+							currentScreen = new WindowSettingScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " window setting screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing window mode setting screen");
+							switch (returnCode) {
+								case 2:
+									DrawManager.getInstance().setMiniScreenFrame();
+									frame.setSize(WIDTH, HEIGHT);
+									frame.resizingScreen();
+									frame.getGraphics().fillRect(0, 0, frame.getWidth(), frame.getHeight());
+									break;
+								case 3:
+									DrawManager.getInstance().setMiniScreenFrame();
+									frame.setSize((int)Math.round(WIDTH*1.5), (int)Math.round(HEIGHT*1.5));
+									frame.resizingScreen();
+									frame.getGraphics().fillRect(0, 0, frame.getWidth(), frame.getHeight());
+									break;
+								case 4:
+									DrawManager.getInstance().setFullScreenFrame();
+									frame.resizingScreen();
+									frame.getGraphics().fillRect(0, 0, frame.getWidth(), frame.getHeight());
+									break;
+								default:
+									break;
+							}
+							width = frame.getWidth();
+							height = frame.getHeight();
+							LOGGER.info("Set " + width + "x" + height
+									+ " screen at " + FPS + " fps.");
 							break;
 						case 3:
 							// difficulty setting
@@ -271,15 +296,15 @@ public final class Core {
 							returnCode = frame.setScreen(currentScreen);
 							LOGGER.info("Difficulty screen.");
 							switch (returnCode) {
-								case 5:
+								case 1:
 									gameSettings_Default=gameSettings_Default;
 									LOGGER.info("NORMAL MODE");
 									break;
-								case 6:
+								case 2:
 									gameSettings_Default=gameSettings_Hard;
 									LOGGER.info("HARD MODE");
 									break;
-								case 7:
+								case 3:
 									gameSettings_Default=gameSettings_Expert;
 									LOGGER.info("EXPERT MODE");
 									break;
@@ -287,9 +312,9 @@ public final class Core {
 									break;
 							}
 							break;
-						case 4:
-							// sound volume setting
-							break;
+//						case 4:
+//							// sound volume setting
+//							break;
 						case 0:
 							returnCode = 1;
 							break;

@@ -47,6 +47,8 @@ public class Screen {
 	/** Hit sound effect */
 	protected Audio hitSound;
 
+	private final int FPS = 60;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -84,9 +86,8 @@ public class Screen {
 	 */
 	public int run() {
 		this.isRunning = true;
-
-		backgroundMusic = new Audio("res/audio", true);
-		hitSound = new Audio("res/audio", false);
+//		backgroundMusic = new Audio("res/audio", true);
+//		hitSound = new Audio("res/audio", false);
 		while (this.isRunning) {
 			long time = System.currentTimeMillis();
 
@@ -122,10 +123,24 @@ public class Screen {
 
 	/**
 	 * Getter for screen height.
-	 * 
+	 *
 	 * @return Screen height.
 	 */
 	public final int getHeight() {
 		return this.height;
 	}
+
+	/**
+	 * Getter for screen ratio.
+	 *
+	 * @return double ratio.
+	 */
+	public final double getRatio() { return this.width / 434f; }
+
+	/**
+	 * Getter for position.
+	 *
+	 * @return int position.
+	 */
+	public int getPosition(final int position) { return (int) (position * this.getRatio()); }
 }

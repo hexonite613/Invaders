@@ -154,7 +154,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 		}
 
-		this.shipWidth = this.enemyShips.get(0).get(0).getWidth();
+		this.shipWidth = this.enemyShips.get(0).get(0).getWidth() ;
 		this.shipHeight = this.enemyShips.get(0).get(0).getHeight();
 
 		this.width = (this.nShipsWide - 1) * SEPARATION_DISTANCE
@@ -211,9 +211,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			movementInterval = 0;
 
 			boolean isAtBottom = positionY
-					+ this.height > screen.getHeight() - BOTTOM_MARGIN;
+					+ this.height > 497 - BOTTOM_MARGIN;
 			boolean isAtRightSide = positionX
-					+ this.width >= screen.getWidth() - SIDE_MARGIN;
+					+ this.width >= 434 - SIDE_MARGIN;
+
 			boolean isAtLeftSide = positionX <= SIDE_MARGIN;
 			boolean isAtHorizontalAltitude = positionY % DESCENT_DISTANCE == 0;
 
