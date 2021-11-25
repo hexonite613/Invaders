@@ -46,6 +46,8 @@ public final class DrawManager {
 	private static Font fontBig;
 	/** Big sized font properties. */
 	private static FontMetrics fontBigMetrics;
+	/**Place adjustment*/
+	private static final int adjust=30;
 
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
@@ -405,6 +407,68 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, restartString, 3, 2,
 				screen.getHeight() / 3 * 2);
 	}
+
+	/**
+	 * Draws Game Summary.
+	 *
+	 *@paramscreen
+	 *            Screen to draw on.
+	 */
+	public void drawSummary(final Screen screen) {
+		String summarytitleString = "Game Summary";
+		String summarydetails1=
+				"Aliens are invading Earth";
+		String summarydetails2=
+				"it is your job to defend your ";
+		String summarydetails3=
+				"home planet from the 3 types of " ;
+		String summarydetails4=
+				"descending Invaders";
+
+		String gamemanualtitleString="Game Manual";
+		String gamemanualdetailString1=
+				"Move: A+D / Left+Right Key";
+		String gamemanualdetailString2=
+				"Shoot: Space";
+		String gamemanualdetailString3=
+				"Pause: ESC";
+
+		String instructionsString = "To continue, press Space";
+
+/** Game summary title */
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, summarytitleString, screen.getHeight() / 4-adjust);
+
+/** Game summary details */
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails1, screen.getHeight() / 4);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails2, screen.getHeight() / 4+adjust);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails3, screen.getHeight() / 4+adjust*2);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails4, screen.getHeight() / 4+adjust*3);
+
+/** Game manual title */
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, gamemanualtitleString, screen.getHeight() / 4+adjust*6);
+
+/** Game manual details */
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, gamemanualdetailString1, screen.getHeight()/4+adjust*7);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, gamemanualdetailString2, screen.getHeight()/4+adjust*8);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, gamemanualdetailString3, screen.getHeight()/4+adjust*9);
+
+
+
+/** How to Continue */
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight()/4+adjust*11);
+	}
+
 
 	/** set CheckOut Screen */
 	public void drawCheckOutScreen(final Screen screen){
