@@ -202,6 +202,11 @@ public final class Core {
 					LOGGER.info("Closing title screen.");
 				break;
 			case 2:
+				//Game Summary & Manual
+				currentScreen=new GameSummaryScreen(width, height,FPS);
+				LOGGER.info("Starting " +WIDTH+ "x" +HEIGHT
+						+ " Game Summary screen at " +FPS+ " fps.");
+				returnCode=frame.setScreen(currentScreen);
 				// Game & score.
 				do {
 					// One extra live every few levels.
