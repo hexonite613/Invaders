@@ -9,9 +9,9 @@ import screen.Screen;
 
 /**
  * Implements a frame to show screens on.
- * 
+ *
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
@@ -45,6 +45,7 @@ public class Frame extends JFrame {
 		Insets insets = getInsets();
 		this.width = width - insets.left - insets.right;
 		this.height = height - insets.top + insets.bottom;
+		System.out.println("frame : " + this.width + " x " + this.height);
 		setTitle("Invaders");
 
 		addKeyListener(Core.getInputManager());
