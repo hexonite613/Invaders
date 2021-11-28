@@ -8,11 +8,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import screen.GameScreen;
-import screen.HighScoreScreen;
-import screen.ScoreScreen;
-import screen.Screen;
-import screen.TitleScreen;
+import screen.*;
 
 /**
  * Implements core game logic.
@@ -128,6 +124,11 @@ public final class Core {
 				LOGGER.info("Closing title screen.");
 				break;
 			case 2:
+				//Game Summary & Manual
+				currentScreen=new GameSummaryScreen(width, height,FPS);
+				LOGGER.info("Starting " +WIDTH+ "x" +HEIGHT
+						+ " Game Summary screen at " +FPS+ " fps.");
+				returnCode=frame.setScreen(currentScreen);
 				// Game & score.
 				do {
 					// One extra live every few levels.
