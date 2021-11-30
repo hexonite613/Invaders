@@ -42,11 +42,6 @@ public class Screen {
 	/** What kind of screen goes next. */
 	protected int returnCode;
 
-	/** Background Music */
-	protected Audio backgroundMusic;
-	/** Hit sound effect */
-	protected Audio hitSound;
-
 	private final int FPS = 60;
 
 	/**

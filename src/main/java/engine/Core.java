@@ -116,7 +116,7 @@ public final class Core {
 	/** Difficulty expert settings list. */
 	private static List<GameSettings> gameSettings_Expert;
 	/** Application logger. */
-	private static final Logger LOGGER = Logger.getLogger(engine.Core.class
+	private static final Logger LOGGER = Logger.getLogger(Core.class
 			.getSimpleName());
 	/** Logger handler for printing to disk. */
 	private static Handler fileHandler;

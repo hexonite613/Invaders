@@ -1,18 +1,14 @@
 package entity;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Logger;
-
-import screen.Screen;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager;
 import engine.DrawManager.SpriteType;
 import engine.GameSettings;
+import screen.Screen;
+
+import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Groups enemy ships into a formation that moves together.
@@ -154,7 +150,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 		}
 
-		this.shipWidth = this.enemyShips.get(0).get(0).getWidth() ;
+		this.shipWidth = this.enemyShips.get(0).get(0).getWidth();
 		this.shipHeight = this.enemyShips.get(0).get(0).getHeight();
 
 		this.width = (this.nShipsWide - 1) * SEPARATION_DISTANCE
@@ -211,10 +207,9 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			movementInterval = 0;
 
 			boolean isAtBottom = positionY
-					+ this.height > 497 - BOTTOM_MARGIN;
+					+ this.height > screen.getHeight() - BOTTOM_MARGIN;
 			boolean isAtRightSide = positionX
-					+ this.width >= 434 - SIDE_MARGIN;
-
+					+ this.width >= screen.getWidth() - SIDE_MARGIN;
 			boolean isAtLeftSide = positionX <= SIDE_MARGIN;
 			boolean isAtHorizontalAltitude = positionY % DESCENT_DISTANCE == 0;
 

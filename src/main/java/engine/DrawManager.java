@@ -21,7 +21,7 @@ import entity.Ship;
 public final class DrawManager {
 
 	/** Singleton instance of the class. */
-	private static engine.DrawManager instance;
+	private static DrawManager instance;
 	/** Current frame. */
 	private static Frame frame;
 	/** FileManager instance. */
@@ -53,7 +53,7 @@ public final class DrawManager {
 	private Screen screen;
 
 	/** Sprite types mapped to their images. */
-	private static Map<engine.DrawManager.SpriteType, boolean[][]> spriteMap;
+	private static Map<SpriteType, boolean[][]> spriteMap;
 
 	/** Sprite types. */
 	public static enum SpriteType {
@@ -95,20 +95,20 @@ public final class DrawManager {
 		graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
 
 		try {
-			spriteMap = new LinkedHashMap<engine.DrawManager.SpriteType, boolean[][]>();
+			spriteMap = new LinkedHashMap<SpriteType, boolean[][]>();
 
-			spriteMap.put(engine.DrawManager.SpriteType.Ship, new boolean[13][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.ShipDestroyed, new boolean[13][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.Bullet, new boolean[3][5]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyBullet, new boolean[3][5]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyShipA1, new boolean[12][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyShipA2, new boolean[12][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyShipB1, new boolean[12][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyShipB2, new boolean[12][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyShipC1, new boolean[12][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyShipC2, new boolean[12][8]);
-			spriteMap.put(engine.DrawManager.SpriteType.EnemyShipSpecial, new boolean[16][7]);
-			spriteMap.put(engine.DrawManager.SpriteType.Explosion, new boolean[13][7]);
+			spriteMap.put(SpriteType.Ship, new boolean[13][8]);
+			spriteMap.put(SpriteType.ShipDestroyed, new boolean[13][8]);
+			spriteMap.put(SpriteType.Bullet, new boolean[3][5]);
+			spriteMap.put(SpriteType.EnemyBullet, new boolean[3][5]);
+			spriteMap.put(SpriteType.EnemyShipA1, new boolean[12][8]);
+			spriteMap.put(SpriteType.EnemyShipA2, new boolean[12][8]);
+			spriteMap.put(SpriteType.EnemyShipB1, new boolean[12][8]);
+			spriteMap.put(SpriteType.EnemyShipB2, new boolean[12][8]);
+			spriteMap.put(SpriteType.EnemyShipC1, new boolean[12][8]);
+			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
+			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
+			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
@@ -130,9 +130,9 @@ public final class DrawManager {
 	 *
 	 * @return Shared instance of DrawManager.
 	 */
-	protected static engine.DrawManager getInstance() {
+	protected static DrawManager getInstance() {
 		if (instance == null)
-			instance = new engine.DrawManager();
+			instance = new DrawManager();
 		return instance;
 	}
 	/**
