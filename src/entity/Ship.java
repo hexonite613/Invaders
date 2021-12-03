@@ -26,6 +26,10 @@ public class Ship extends Entity {
 	private Cooldown shootingCooldown;
 	/** Time spent inactive between hits. */
 	private Cooldown destructionCooldown;
+	/** Time to exchange from AttackedEffect to DyingEffect. */
+	private Cooldown effectCooldown;
+    /** Time to change direction */
+    private Cooldown vibrationCooldown;
 
 	/**
 	 * Constructor, establishes the ship's properties.
@@ -40,7 +44,9 @@ public class Ship extends Entity {
 
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
-		this.destructionCooldown = Core.getCooldown(1000);
+		this.destructionCooldown = Core.getCooldown(1200);
+		this.effectCooldown = Core.getCooldown(200);
+        this.vibrationCooldown = Core.getCooldown(200);
 	}
 
 	/**
@@ -80,8 +86,14 @@ public class Ship extends Entity {
 	 * Updates status of the ship.
 	 */
 	public final void update() {
-		if (!this.destructionCooldown.checkFinished())
-			this.spriteType = SpriteType.ShipDestroyed;
+		if (!this.destructionCooldown.checkFinished()) { //1200
+			if (!this.effectCooldown.checkFinished()) { //200
+				this.spriteType = SpriteType.Explosion;
+			}
+			else
+				this.spriteType = SpriteType.ShipDestroyed;
+
+		}
 		else
 			this.spriteType = SpriteType.Ship;
 	}
@@ -91,6 +103,8 @@ public class Ship extends Entity {
 	 */
 	public final void destroy() {
 		this.destructionCooldown.reset();
+		this.effectCooldown.reset();
+		this.vibrationCooldown.reset();
 	}
 
 	/**
