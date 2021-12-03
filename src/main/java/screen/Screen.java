@@ -1,10 +1,10 @@
 package screen;
 
-import java.awt.Insets;
+import engine.*;
+
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
-
-import engine.*;
 
 /**
  * Implements a generic screen.
@@ -41,11 +41,6 @@ public class Screen {
 	protected boolean isRunning;
 	/** What kind of screen goes next. */
 	protected int returnCode;
-
-	/** Background Music */
-	protected Audio backgroundMusic;
-	/** Hit sound effect */
-	protected Audio hitSound;
 
 	private final int FPS = 60;
 

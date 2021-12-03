@@ -1,10 +1,9 @@
 package engine;
 
-import java.awt.*;
-
-import javax.swing.JFrame;
-
 import screen.Screen;
+
+import javax.swing.*;
+import java.awt.*;
 
 
 /**

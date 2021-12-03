@@ -1,15 +1,10 @@
 package engine;
 
-import java.awt.*;
+import screen.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import screen.*;
+import java.util.logging.*;
 
 /**
  * Implements core game logic.
@@ -116,7 +111,7 @@ public final class Core {
 	/** Difficulty expert settings list. */
 	private static List<GameSettings> gameSettings_Expert;
 	/** Application logger. */
-	private static final Logger LOGGER = Logger.getLogger(engine.Core.class
+	private static final Logger LOGGER = Logger.getLogger(Core.class
 			.getSimpleName());
 	/** Logger handler for printing to disk. */
 	private static Handler fileHandler;
