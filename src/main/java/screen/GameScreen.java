@@ -1,14 +1,19 @@
 package screen;
 
+import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
+
 import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
 import engine.GameState;
-import entity.*;
-
-import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.Set;
+import entity.Bullet;
+import entity.BulletPool;
+import entity.EnemyShip;
+import entity.EnemyShipFormation;
+import entity.Entity;
+import entity.Ship;
 
 /**
  * Implements the game screen, where the action happens.
