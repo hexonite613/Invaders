@@ -1,9 +1,6 @@
 package screen;
 
-import engine.Cooldown;
-import engine.Core;
-import engine.GameSettings;
-import engine.GameState;
+import engine.*;
 import entity.*;
 
 import java.awt.event.KeyEvent;
@@ -66,6 +63,12 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
+	/** Audio */
+	private Audio specialAudio;
+	private Audio shootAudio;
+	private Audio explosionAudio;
+	private Audio gameOver;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -120,6 +123,11 @@ public class GameScreen extends Screen {
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
 		this.inputDelay.reset();
+
+		// Load Audio file.
+		this.shootAudio = new Audio("shootAudio", false);
+		this.explosionAudio = new Audio("explosionAudio", false);
+		this.gameOver = new Audio("gameOver", false);
 	}
 
 	/**
@@ -162,8 +170,10 @@ public class GameScreen extends Screen {
 					this.ship.moveLeft();
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
-					if (this.ship.shoot(this.bullets))
+					if (this.ship.shoot(this.bullets)) {
+						this.shootAudio.start();
 						this.bulletsShot++;
+					}
 			}
 
 			if (this.enemyShipSpecial != null) {
@@ -175,12 +185,15 @@ public class GameScreen extends Screen {
 			}
 			if (this.enemyShipSpecial == null
 					&& this.enemyShipSpecialCooldown.checkFinished()) {
+				this.specialAudio = new Audio("specialAudio", true);
+				this.specialAudio.start();
 				this.enemyShipSpecial = new EnemyShip();
 				this.enemyShipSpecialCooldown.reset();
 				this.logger.info("A special ship appears");
 			}
 			if (this.enemyShipSpecial != null
 					&& this.enemyShipSpecial.getPositionX() > this.width) {
+				this.specialAudio.stop();
 				this.enemyShipSpecial = null;
 				this.logger.info("The special ship has escaped");
 			}
@@ -197,6 +210,7 @@ public class GameScreen extends Screen {
 		if ((this.enemyShipFormation.isEmpty() || this.lives == 0)
 				&& !this.levelFinished) {
 			this.levelFinished = true;
+			this.gameOver.start();
 			this.screenFinishedCooldown.reset();
 		}
 
@@ -272,6 +286,7 @@ public class GameScreen extends Screen {
 					if (!this.ship.isDestroyed()) {
 						this.ship.destroy();
 						this.lives--;
+						this.explosionAudio.start();
 						this.logger.info("Hit on player ship, " + this.lives
 								+ " lives remaining.");
 					}

@@ -1,10 +1,7 @@
 package entity;
 
-import engine.Cooldown;
-import engine.Core;
-import engine.DrawManager;
+import engine.*;
 import engine.DrawManager.SpriteType;
-import engine.GameSettings;
 import screen.Screen;
 
 import java.util.*;
@@ -91,6 +88,12 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/** Number of not destroyed ships. */
 	private int shipCount;
 
+
+	private Audio fastInvader1;
+	private Audio fastInvader2;
+	private Audio fastInvader3;
+	private Audio fastInvader4;
+	private int moveCnt;
 	/** Directions the formation can move. */
 	private enum Direction {
 		/** Movement to the right side of the screen. */
@@ -124,6 +127,12 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		this.positionY = INIT_POS_Y;
 		this.shooters = new ArrayList<EnemyShip>();
 		SpriteType spriteType;
+
+		fastInvader1 = new Audio("fastInvader1", false);
+		fastInvader2 = new Audio("fastInvader2", false);
+		fastInvader3 = new Audio("fastInvader3", false);
+		fastInvader4 = new Audio("fastInvader4", false);
+		moveCnt = 1;
 
 		this.logger.info("Initializing " + nShipsWide + "x" + nShipsHigh
 				+ " ship formation in (" + positionX + "," + positionY + ")");
@@ -253,6 +262,24 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 			positionX += movementX;
 			positionY += movementY;
+			switch (moveCnt) {
+				case 1:
+					fastInvader4.start();
+					moveCnt++;
+					break;
+				case 2:
+					fastInvader1.start();
+					moveCnt++;
+					break;
+				case 3:
+					fastInvader2.start();
+					moveCnt++;
+					break;
+				case 4:
+					fastInvader3.start();
+					moveCnt = 1;
+					break;
+			}
 
 			// Cleans explosions.
 			List<EnemyShip> destroyed;

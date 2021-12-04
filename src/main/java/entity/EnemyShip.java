@@ -1,5 +1,6 @@
 package entity;
 
+import engine.Audio;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
@@ -29,6 +30,8 @@ public class EnemyShip extends Entity {
 	private boolean isDestroyed;
 	/** Values of the ship, in points, when destroyed. */
 	private int pointValue;
+
+	private static final Audio invaderKilled = new Audio("invaderKilled", false);
 
 	/**
 	 * Constructor, establishes the ship's properties.
@@ -139,6 +142,7 @@ public class EnemyShip extends Entity {
 	public final void destroy() {
 		this.isDestroyed = true;
 		this.spriteType = SpriteType.Explosion;
+		invaderKilled.start();
 	}
 
 	/**

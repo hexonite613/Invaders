@@ -49,6 +49,8 @@ public final class Core {
 	/** Difficulty settings for level 7. */
 	private static final GameSettings SETTINGS_LEVEL_7 =
 			new GameSettings(8, 7, 2, 500);
+
+	private static final Audio background = new Audio("bgm", true);
 	
 	/** Frame to draw the screen on. */
 	private static Frame frame;
@@ -114,6 +116,7 @@ public final class Core {
 			case 1:
 				// Main menu.
 				currentScreen = new TitleScreen(width, height, FPS);
+				background.start();
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " title screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
@@ -130,6 +133,7 @@ public final class Core {
 					currentScreen = new GameScreen(gameState,
 							gameSettings.get(gameState.getLevel() - 1),
 							bonusLife, width, height, FPS);
+					background.stop();
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " game screen at " + FPS + " fps.");
 					frame.setScreen(currentScreen);

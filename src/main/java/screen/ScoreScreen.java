@@ -4,6 +4,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.GameState;
 import engine.Score;
+import engine.Audio;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -12,9 +13,9 @@ import java.util.List;
 
 /**
  * Implements the score screen.
- * 
+ *
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
+ *
  */
 public class ScoreScreen extends Screen {
 
@@ -46,9 +47,11 @@ public class ScoreScreen extends Screen {
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
 
+	private Audio scoreAudio;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
-	 * 
+	 *
 	 * @param width
 	 *            Screen width.
 	 * @param height
@@ -72,6 +75,9 @@ public class ScoreScreen extends Screen {
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
 
+		this.scoreAudio = new Audio("scoreAudio", false);
+		this.scoreAudio.start();
+
 		try {
 			this.highScores = Core.getFileManager().loadHighScores();
 			if (highScores.size() < MAX_HIGH_SCORE_NUM
@@ -86,12 +92,11 @@ public class ScoreScreen extends Screen {
 
 	/**
 	 * Starts the action.
-	 * 
+	 *
 	 * @return Next screen code.
 	 */
 	public final int run() {
 		super.run();
-
 		return this.returnCode;
 	}
 
