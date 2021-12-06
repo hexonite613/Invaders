@@ -1,7 +1,9 @@
 package screen;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import engine.Cooldown;
@@ -44,6 +46,10 @@ public class GameScreen extends Screen {
 	private int level;
 	/** Formation of enemy ships. */
 	private EnemyShipFormation enemyShipFormation;
+
+	/** UFO 랜덤 발사 */
+	private int position;
+
 	/** Player's ship. */
 	private Ship ship;
 	/** Bonus enemy ship that appears sometimes. */
@@ -71,6 +77,12 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
+	/** Checks boss stage. */
+	private boolean bossStage;
+
+	/** 생명력 */
+	private int bulletCode;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -78,7 +90,7 @@ public class GameScreen extends Screen {
 	 *            Current game state.
 	 * @param gameSettings
 	 *            Current game settings.
-	 * @param bonnusLife
+	 * @param bonusLife
 	 *            Checks if a bonus life is awarded this level.
 	 * @param width
 	 *            Screen width.
@@ -88,12 +100,13 @@ public class GameScreen extends Screen {
 	 *            Frames per second, frame rate at which the game is run.
 	 */
 	public GameScreen(final GameState gameState,
-			final GameSettings gameSettings, final boolean bonusLife,
-			final int width, final int height, final int fps) {
+					  final GameSettings gameSettings, final boolean bonusLife, final boolean bossStage,
+					  final int width, final int height, final int fps) {
 		super(width, height, fps);
 
 		this.gameSettings = gameSettings;
 		this.bonusLife = bonusLife;
+		this.bossStage = bossStage;
 		this.level = gameState.getLevel();
 		this.score = gameState.getScore();
 		this.lives = gameState.getLivesRemaining();
@@ -101,6 +114,8 @@ public class GameScreen extends Screen {
 			this.lives++;
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
+
+
 	}
 
 	/**
@@ -172,16 +187,27 @@ public class GameScreen extends Screen {
 			}
 
 			if (this.enemyShipSpecial != null) {
-				if (!this.enemyShipSpecial.isDestroyed())
+				if (!this.enemyShipSpecial.isDestroyed()) {
 					this.enemyShipSpecial.move(2, 0);
+
+					if(this.enemyShipSpecial.getPositionX() == position) {
+						bullets.add(BulletPool.getBullet(enemyShipSpecial.getPositionX()+8,
+								+ enemyShipSpecial.getPositionY(), 4, Color.RED));
+						this.bulletCode = 1;
+					}
+
+				}
 				else if (this.enemyShipSpecialExplosionCooldown.checkFinished())
 					this.enemyShipSpecial = null;
-
 			}
+
 			if (this.enemyShipSpecial == null
 					&& this.enemyShipSpecialCooldown.checkFinished()) {
 				this.enemyShipSpecial = new EnemyShip();
 				this.enemyShipSpecialCooldown.reset();
+				// width == 448, 처음 위치 = -32
+				Random rand = new Random();
+				this.position = 20 + rand.nextInt((this.width-50)/2)*2;
 				this.logger.info("A special ship appears");
 			}
 			if (this.enemyShipSpecial != null
@@ -276,7 +302,12 @@ public class GameScreen extends Screen {
 					recyclable.add(bullet);
 					if (!this.ship.isDestroyed()) {
 						this.ship.destroy();
-						this.lives--;
+						if (this.bulletCode == 1) {
+							this.lives -= 2;
+							this.bulletCode = 0;
+						} else {
+							this.lives--;
+						}
 						this.logger.info("Hit on player ship, " + this.lives
 								+ " lives remaining.");
 					}
