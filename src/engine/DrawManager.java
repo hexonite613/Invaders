@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
+import entity.EnemyShip;
 
 /**
  * Manages screen drawing.
@@ -185,16 +186,58 @@ public final class DrawManager {
 	 *            Coordinates for the upper side of the image.
 	 */
 	public void drawEntity(final Entity entity, final int positionX,
-			final int positionY) {
+						   final int positionY) {
 		boolean[][] image = spriteMap.get(entity.getSpriteType());
 
 		backBufferGraphics.setColor(entity.getColor());
+
+		switch (entity.getHp()) {
+			case 1: backBufferGraphics.setColor(Color.WHITE);
+				break;
+
+			case 2: backBufferGraphics.setColor(Color.orange);
+				break;
+		}
+
 		for (int i = 0; i < image.length; i++)
 			for (int j = 0; j < image[i].length; j++)
 				if (image[i][j])
-					backBufferGraphics.drawRect(positionX + i * 2, positionY
-							+ j * 2, 1, 1);
+					backBufferGraphics.fillRect(screen.getPosition(positionX) + i * screen.getPosition(2),
+							screen.getPosition(positionY) + j * screen.getPosition(2),
+							screen.getPosition(2), screen.getPosition(2));
 	}
+
+
+	/**draw "BULLET: " left from bullet count*/
+	public void drawBulletCountString (final Screen screen) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.WHITE);
+		String bulletCountString = "Bullet: ";
+		backBufferGraphics.drawString(bulletCountString,screen.getWidth() - screen.getPosition(270), screen.getPosition(25));}
+
+	/**
+	 * Draws current bullet count on screen.
+	 *
+	 * @param screen
+	 *            Screen to draw on
+	 *            Current bullet count.
+	 */
+
+	public void drawBulletCount(final Screen screen, final int bulletsShot) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.WHITE);
+		String scoreString = String.format("%04d", bulletsShot);
+		backBufferGraphics.drawString(scoreString,
+				screen.getWidth() - screen.getPosition(195), screen.getPosition(25));
+	}
+	/**draw "SCORE: " left from score*/
+	public void drawScoreString (final Screen screen) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.WHITE);
+		String bulletCountString = "Score: ";
+		backBufferGraphics.drawString(bulletCountString,screen.getWidth() - screen.getPosition(125), screen.getPosition(25));}
+
+
 
 	/**
 	 * For debugging purpouses, draws the canvas borders.

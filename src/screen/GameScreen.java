@@ -230,6 +230,10 @@ public class GameScreen extends Screen {
 					bullet.getPositionY());
 
 		// Interface.
+		drawManager.drawBulletCount(this, this.bulletsShot);
+		drawManager.drawBulletCountString (this);
+		drawManager.drawScoreString(this);
+
 		drawManager.drawScore(this, this.score);
 		drawManager.drawLives(this, this.lives);
 		drawManager.drawHorizontalLine(this, SEPARATION_LINE_HEIGHT - 1);
@@ -276,13 +280,6 @@ public class GameScreen extends Screen {
 					recyclable.add(bullet);
 					if (!this.ship.isDestroyed()) {
 						this.ship.destroy();
-
-
-						// Add the Attacked Effect when the last life is over.
-						this.ship.update();
-
-
-
 						this.lives--;
 						this.logger.info("Hit on player ship, " + this.lives
 								+ " lives remaining.");
@@ -292,10 +289,18 @@ public class GameScreen extends Screen {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
 					if (!enemyShip.isDestroyed()
 							&& checkCollision(bullet, enemyShip)) {
-						this.score += enemyShip.getPointValue();
-						this.shipsDestroyed++;
-						this.enemyShipFormation.destroy(enemyShip);
-						recyclable.add(bullet);
+						if (enemyShip.getHp() == 1) {
+							this.score += enemyShip.getPointValue();
+							this.shipsDestroyed++;
+							this.enemyShipFormation.destroy(enemyShip);
+							recyclable.add(bullet);
+						}
+						if (enemyShip.getHp() == 2) {
+							this.score += enemyShip.getPointValue();
+							recyclable.add(bullet);
+							enemyShip.hp--;
+
+						}
 					}
 				if (this.enemyShipSpecial != null
 						&& !this.enemyShipSpecial.isDestroyed()
