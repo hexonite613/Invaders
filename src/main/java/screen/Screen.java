@@ -1,6 +1,8 @@
 package screen;
 
-import java.awt.Insets;
+import engine.*;
+
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 

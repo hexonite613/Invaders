@@ -5,6 +5,8 @@ import engine.Core;
 import engine.DrawManager;
 import engine.DrawManager.SpriteType;
 import engine.GameSettings;
+import entity.Bullet;
+import entity.BulletPool;
 import screen.Screen;
 
 import java.util.*;
@@ -142,7 +144,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				else
 					spriteType = SpriteType.EnemyShipA1;
 
-				column.add(new EnemyShip((SEPARATION_DISTANCE 
+				column.add(new EnemyShip((SEPARATION_DISTANCE
 						* this.enemyShips.indexOf(column))
 								+ positionX, (SEPARATION_DISTANCE * i)
 								+ positionY, spriteType));
@@ -150,7 +152,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 		}
 
-		this.shipWidth = this.enemyShips.get(0).get(0).getWidth();
+		this.shipWidth = this.enemyShips.get(0).get(0).getWidth() ;
 		this.shipHeight = this.enemyShips.get(0).get(0).getHeight();
 
 		this.width = (this.nShipsWide - 1) * SEPARATION_DISTANCE
@@ -207,9 +209,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			movementInterval = 0;
 
 			boolean isAtBottom = positionY
-					+ this.height > screen.getHeight() - BOTTOM_MARGIN;
+					+ this.height > 497 - BOTTOM_MARGIN;
 			boolean isAtRightSide = positionX
-					+ this.width >= screen.getWidth() - SIDE_MARGIN;
+					+ this.width >= 434 - SIDE_MARGIN;
+
 			boolean isAtLeftSide = positionX <= SIDE_MARGIN;
 			boolean isAtHorizontalAltitude = positionY % DESCENT_DISTANCE == 0;
 

@@ -3,6 +3,8 @@ package entity;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+import entity.Bullet;
+import entity.BulletPool;
 
 import java.awt.*;
 import java.util.Set;

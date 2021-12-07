@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import screen.Screen;
 
 
+
 /**
  * Implements a frame to show screens on.
  *
