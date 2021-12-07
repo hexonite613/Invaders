@@ -123,7 +123,8 @@ public class Entity {
 	public final int getHeight() {
 		return this.height;
 	}
-}
+
 	/**getter hp for set color*/
 	public int getHp () { return this.hp; }
+
 }
