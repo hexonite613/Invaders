@@ -44,17 +44,19 @@ public class EnemyShip extends Entity {
 	 *            Sprite type, image corresponding to the ship.
 	 */
 	public EnemyShip(final int positionX, final int positionY,
-			final SpriteType spriteType) {
+					 final SpriteType spriteType, int hp) {
 		super(positionX, positionY, 12 * 2, 8 * 2, Color.WHITE);
 
 		this.spriteType = spriteType;
 		this.animationCooldown = Core.getCooldown(500);
 		this.isDestroyed = false;
 
+		this.hp = hp;
+
 		switch (this.spriteType) {
-		case EnemyShipA1:
-		case EnemyShipA2:
-			this.pointValue = A_TYPE_POINTS;
+			case EnemyShipA1:
+			case EnemyShipA2:
+				this.pointValue = A_TYPE_POINTS;
 			break;
 		case EnemyShipB1:
 		case EnemyShipB2:

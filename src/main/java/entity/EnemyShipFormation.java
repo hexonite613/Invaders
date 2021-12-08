@@ -143,18 +143,28 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 		for (List<EnemyShip> column : this.enemyShips) {
 			for (int i = 0; i < this.nShipsHigh; i++) {
-				if (i / (float) this.nShipsHigh < PROPORTION_C)
+				if (i / (float) this.nShipsHigh < PROPORTION_C){
 					spriteType = SpriteType.EnemyShipC1;
+					column.add(new EnemyShip((SEPARATION_DISTANCE
+							* this.enemyShips.indexOf(column))
+							+ positionX, (SEPARATION_DISTANCE * i)
+							+ positionY, spriteType, 2));
+				}
 				else if (i / (float) this.nShipsHigh < PROPORTION_B
-						+ PROPORTION_C)
+						+ PROPORTION_C) {
 					spriteType = SpriteType.EnemyShipB1;
-				else
+					column.add(new EnemyShip((SEPARATION_DISTANCE
+							* this.enemyShips.indexOf(column))
+							+ positionX, (SEPARATION_DISTANCE * i)
+							+ positionY, spriteType, 1));
+				}
+				else {
 					spriteType = SpriteType.EnemyShipA1;
-
-				column.add(new EnemyShip((SEPARATION_DISTANCE 
-						* this.enemyShips.indexOf(column))
-								+ positionX, (SEPARATION_DISTANCE * i)
-								+ positionY, spriteType));
+					column.add(new EnemyShip((SEPARATION_DISTANCE
+							* this.enemyShips.indexOf(column))
+							+ positionX, (SEPARATION_DISTANCE * i)
+							+ positionY, spriteType, 1));
+				}
 				this.shipCount++;
 			}
 		}
