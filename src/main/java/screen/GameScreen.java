@@ -1,14 +1,20 @@
 package screen;
 
+import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
+
 import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
 import engine.GameState;
-import entity.*;
 
-import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.Set;
+import entity.Bullet;
+import entity.BulletPool;
+import entity.EnemyShip;
+import entity.EnemyShipFormation;
+import entity.Entity;
+import entity.Ship;
 
 /**
  * Implements the game screen, where the action happens.
@@ -17,7 +23,6 @@ import java.util.Set;
  * 
  */
 public class GameScreen extends Screen {
-
 	/** Milliseconds until the screen accepts user input. */
 	private static final int INPUT_DELAY = 6000;
 	/** Bonus score for each life remaining at the end of the level. */
@@ -66,6 +71,16 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
+	/** pause */
+	private boolean isPause;
+	/** Check if the game will restart */
+	private boolean isResume;
+	/** Milliseconds between changes in user selection. */
+	private static final int SELECTION_TIME = 200;
+
+	/** Time between changes in user selection. */
+	private Cooldown selectionCooldown;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -73,7 +88,7 @@ public class GameScreen extends Screen {
 	 *            Current game state.
 	 * @param gameSettings
 	 *            Current game settings.
-	 * @param bonnusLife
+	 * @param bonusLife
 	 *            Checks if a bonus life is awarded this level.
 	 * @param width
 	 *            Screen width.
@@ -83,8 +98,8 @@ public class GameScreen extends Screen {
 	 *            Frames per second, frame rate at which the game is run.
 	 */
 	public GameScreen(final GameState gameState,
-			final GameSettings gameSettings, final boolean bonusLife,
-			final int width, final int height, final int fps) {
+					  final GameSettings gameSettings, final boolean bonusLife,
+					  final int width, final int height, final int fps) {
 		super(width, height, fps);
 
 		this.gameSettings = gameSettings;
@@ -96,6 +111,9 @@ public class GameScreen extends Screen {
 			this.lives++;
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
+		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
+		this.selectionCooldown.reset();
+
 	}
 
 	/**
@@ -131,6 +149,7 @@ public class GameScreen extends Screen {
 		super.run();
 
 		this.score += LIFE_SCORE * (this.lives - 1);
+		this.isPause = false;
 		this.logger.info("Screen cleared with a score of " + this.score);
 
 		return this.returnCode;
@@ -185,6 +204,57 @@ public class GameScreen extends Screen {
 				this.logger.info("The special ship has escaped");
 			}
 
+			if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)
+					|| inputManager.isKeyDown(KeyEvent.VK_P))
+				isPause = true;
+			while (isPause) {
+				if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
+						|| inputManager.isKeyDown(KeyEvent.VK_A)) {
+					previousMenuItem();
+				}
+				if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
+						|| inputManager.isKeyDown(KeyEvent.VK_D)) {
+					nextMenuItem();
+				}
+				if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
+					try {
+						if (this.returnCode == 0) {
+							this.isPause = false;
+						}
+						else if (this.returnCode == 1) {
+							isResume = true;
+							while (isResume) {
+								if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
+										|| inputManager.isKeyDown(KeyEvent.VK_A)) {
+									previousMenuItem();
+								}
+								if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
+										|| inputManager.isKeyDown(KeyEvent.VK_D)) {
+									nextMenuItem();
+								}
+								if (inputManager.isKeyDown(KeyEvent.VK_ENTER)) // Checkout
+									try {
+										if (this.returnCode == 1) {
+											this.isPause = false;
+											this.isResume = false;
+										} else if (this.returnCode == 0) {
+											this.lives = -1;
+											this.isPause = false;
+											this.isResume = false;
+											this.isRunning = false;
+										}
+										Thread.sleep(100);
+									} catch (InterruptedException e) { }
+								drawCheckOut(this.returnCode);
+							}
+						}
+						Thread.sleep(100);
+					} catch (InterruptedException e) { }
+					this.selectionCooldown.reset();
+				}
+				drawPause(this.returnCode);
+			}
+
 			this.ship.update();
 			this.enemyShipFormation.update();
 			this.enemyShipFormation.shoot(this.bullets);
@@ -202,8 +272,40 @@ public class GameScreen extends Screen {
 
 		if (this.levelFinished && this.screenFinishedCooldown.checkFinished())
 			this.isRunning = false;
-
 	}
+	/**
+	 * Shifts the focus to the next menu item.
+	 */
+	private void nextMenuItem() {
+		this.returnCode = 1;
+	}
+
+	/**
+	 * Shifts the focus to the previous menu item.
+	 */
+	private void previousMenuItem() {
+		this.returnCode = 0;
+	}
+
+	/** next option */
+
+	private void drawPause(final int option) {
+		drawManager.drawPause(this, INPUT_DELAY, this.isPause,
+				option, this.level, this.score, this.lives);
+		drawManager.drawHorizontalLine(this, this.height / 2 - this.height
+				/ 4);
+		drawManager.drawHorizontalLine(this, this.height / 2 + this.height
+				/ 4);
+		drawManager.completeDrawing(this);
+	}
+
+	private void drawCheckOut(final int option) {
+		drawManager.initDrawing(this);
+		drawManager.drawCheckOutScreen(this);
+		drawManager.drawCheckOut(this, option);
+		drawManager.completeDrawing(this);
+	}
+
 
 	/**
 	 * Draws the elements associated with the screen.

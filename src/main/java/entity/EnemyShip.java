@@ -6,6 +6,7 @@ import engine.DrawManager.SpriteType;
 
 import java.awt.*;
 
+
 /**
  * Implements a enemy ship, to be destroyed by the player.
  * 

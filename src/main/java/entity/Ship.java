@@ -1,5 +1,6 @@
 package entity;
 
+
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;

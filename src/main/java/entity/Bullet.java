@@ -1,8 +1,10 @@
 package entity;
 
+
 import engine.DrawManager.SpriteType;
 
 import java.awt.*;
+
 
 /**
  * Implements a bullet that moves vertically up or down.

@@ -1,13 +1,16 @@
 package screen;
 
+
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager;
 import engine.InputManager;
 
+
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
 
 /**
  * Implements a generic screen.
@@ -42,6 +45,7 @@ public class Screen {
 	protected boolean isRunning;
 	/** What kind of screen goes next. */
 	protected int returnCode;
+
 
 	/**
 	 * Constructor, establishes the properties of the screen.
