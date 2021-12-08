@@ -389,6 +389,7 @@ public final class DrawManager {
 	public void drawCheckOutScreen(final Screen screen){
 		String check1String = "Are you sure";
 		String check2String = "you want to return to title?";
+		String guideString = "Press the Enter button";
 		String warningString = "Can't save the score";
 
 		backBufferGraphics.setColor(Color.GREEN);
@@ -397,8 +398,10 @@ public final class DrawManager {
 				+ fontBigMetrics.getHeight() * 6 / 7);
 
 		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, warningString, screen.getHeight()/3
+		drawCenteredRegularString(screen, guideString, screen.getHeight()/3
 				+ fontBigMetrics.getHeight() * 2);
+		drawCenteredRegularString(screen, warningString, screen.getHeight()/3
+				+ fontBigMetrics.getHeight() * 20 / 7);
 	}
 
 	/**Check to go out to title*/
