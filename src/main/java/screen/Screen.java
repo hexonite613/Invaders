@@ -6,8 +6,6 @@ import java.awt.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import engine.*;
-
 /**
  * Implements a generic screen.
  *
@@ -83,8 +81,6 @@ public class Screen {
 	 */
 	public int run() {
 		this.isRunning = true;
-//		backgroundMusic = new Audio("res/audio", true);
-//		hitSound = new Audio("res/audio", false);
 		while (this.isRunning) {
 			long time = System.currentTimeMillis();
 

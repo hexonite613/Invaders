@@ -123,9 +123,6 @@ public final class Core {
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
 
-	/** Proportion of current screen. */
-	private static double Proportion = 1.0;
-
 
 	/**
 	 * Test implementation.
@@ -213,7 +210,7 @@ public final class Core {
 
 						currentScreen = new GameScreen(gameState,
 								gameSettings_Default.get(gameState.getLevel() - 1),
-								bonusLife, width, height, (int)(FPS * currentScreen.getRatio()));
+								bonusLife, width, height, FPS);
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " game screen at " + FPS + " fps.");
 						frame.setScreen(currentScreen);

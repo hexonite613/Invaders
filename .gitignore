@@ -300,7 +300,3 @@ fabric.properties
 # CodeStream plugin
 # https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
-<<<<<<< HEAD
-=======
->>>>>>> develop
->>>>>>> 0e521533955991694810d9e1b240313f74f58b7f

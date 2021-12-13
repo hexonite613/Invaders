@@ -1,5 +1,6 @@
 package entity;
 
+
 import engine.DrawManager.SpriteType;
 
 import java.awt.*;
@@ -47,6 +48,7 @@ public class Entity {
 		this.height = height;
 		this.color = color;
 	}
+
 
 	/**
 	 * Getter for the color of the entity.
