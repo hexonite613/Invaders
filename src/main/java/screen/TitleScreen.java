@@ -1,9 +1,10 @@
 package screen;
 
-import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
+
+import java.awt.event.KeyEvent;
 
 /**
  * Implements the title screen.
