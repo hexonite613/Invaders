@@ -306,7 +306,6 @@ public class GameScreen extends Screen {
 		drawManager.completeDrawing(this);
 	}
 
-
 	/**
 	 * Draws the elements associated with the screen.
 	 */

@@ -1,5 +1,9 @@
 package engine;
 
+import entity.Entity;
+import entity.Ship;
+import screen.Screen;
+
 import java.awt.*;
 
 import java.awt.image.BufferedImage;
@@ -8,10 +12,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
-
-import screen.Screen;
-import entity.Entity;
-import entity.Ship;
 
 /**
  * Manages screen drawing.

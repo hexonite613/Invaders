@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+
 /**
  * Implements a generic screen.
  *
