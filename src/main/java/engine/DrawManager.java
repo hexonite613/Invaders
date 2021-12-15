@@ -47,6 +47,8 @@ public final class DrawManager {
 	private static Font fontBig;
 	/** Big sized font properties. */
 	private static FontMetrics fontBigMetrics;
+	/**Place adjustment*/
+	private static final int adjust=30;
 	/** Frame size */
 	private static Dimension frame_size;
 
@@ -80,8 +82,9 @@ public final class DrawManager {
 		EnemyShipC2,
 		/** Bonus ship. */
 		EnemyShipSpecial,
-		/** Destroyed enemy ship. */
-		Explosion
+		Explosion,
+		/** Boss. */
+		EnemyBoss
 	};
 
 	/**
@@ -110,6 +113,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
+			spriteMap.put(SpriteType.EnemyBoss, new boolean[48][32]);
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
@@ -237,12 +241,21 @@ public final class DrawManager {
 		boolean[][] image = spriteMap.get(entity.getSpriteType());
 
 		backBufferGraphics.setColor(entity.getColor());
-		for (int i = 0; i < image.length; i++)
-			for (int j = 0; j < image[i].length; j++)
-				if (image[i][j])
-					backBufferGraphics.fillRect(screen.getPosition(positionX) + i * screen.getPosition(2),
-							screen.getPosition(positionY) + j * screen.getPosition(2),
-							screen.getPosition(2), screen.getPosition(2));
+		if (entity.getBossStage()) {
+			for (int i = 0; i < image.length; i++)
+				for (int j = 0; j < image[i].length; j++)
+					if (image[i][j])
+						backBufferGraphics.drawRect(screen.getPosition(positionX) + i * screen.getPosition(1),
+								screen.getPosition(positionY) + j * screen.getPosition(1),
+								screen.getPosition(1), screen.getPosition(1));
+		} else {
+			for (int i = 0; i < image.length; i++)
+				for (int j = 0; j < image[i].length; j++)
+					if (image[i][j])
+						backBufferGraphics.fillRect(screen.getPosition(positionX) + i * screen.getPosition(2),
+								screen.getPosition(positionY) + j * screen.getPosition(2),
+								screen.getPosition(2), screen.getPosition(2));
+		}
 	}
 
 	/**
@@ -662,6 +675,67 @@ public final class DrawManager {
 					screen.getHeight() / 4 + fontRegularMetrics.getHeight()
 							* 14);
 		}
+	}
+
+	/**
+	 * Draws Game Summary.
+	 *
+	 *@paramscreen
+	 *            Screen to draw on.
+	 */
+	public void drawSummary(final Screen screen) {
+		String summarytitleString = "Game Summary";
+		String summarydetails1=
+				"Aliens are invading Earth";
+		String summarydetails2=
+				"it is your job to defend your ";
+		String summarydetails3=
+				"home planet from the 3 types of " ;
+		String summarydetails4=
+				"descending Invaders";
+
+		String gamemanualtitleString="Game Manual";
+		String gamemanualdetailString1=
+				"Move: A+D or left+right key";
+		String gamemanualdetailString2=
+				"Shooting: Space";
+		String gamemanualdetailString3=
+				"Pause: ESC";
+
+		String instructionsString = "To Continue, press Space";
+
+/** Game summary title */
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, summarytitleString, screen.getHeight() / 4-adjust);
+
+/** Game summary details */
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails1, screen.getHeight() / 4);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails2, screen.getHeight() / 4+adjust);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails3, screen.getHeight() / 4+adjust*2);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, summarydetails4, screen.getHeight() / 4+adjust*3);
+
+/** Game manual title */
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, gamemanualtitleString, screen.getHeight() / 4+adjust*6);
+
+/** Game manual details */
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, gamemanualdetailString1, screen.getHeight()/4+adjust*7);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, gamemanualdetailString2, screen.getHeight()/4+adjust*8);
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, gamemanualdetailString3, screen.getHeight()/4+adjust*9);
+
+
+
+/** How to exit */
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight()/4+adjust*11);
 	}
 
 	/**

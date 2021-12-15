@@ -6,7 +6,7 @@ import engine.DrawManager.SpriteType;
 import java.awt.*;
 
 /**
- * Implements a generic game entity.z
+ * Implements a generic game entity.
  *
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
  *
@@ -25,6 +25,9 @@ public class Entity {
 	private Color color;
 	/** Sprite type assigned to the entity. */
 	protected SpriteType spriteType;
+
+	protected boolean bossStage;
+
 
 	/**
 	 * Constructor, establishes the entity's generic properties.
@@ -49,6 +52,19 @@ public class Entity {
 		this.color = color;
 	}
 
+	public Entity() {
+
+	}
+
+	public Entity(final int positionX, final int positionY, final int width,
+				  final int height, final Color color, final boolean bossStage) {
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.bossStage = bossStage;
+	}
 
 	/**
 	 * Getter for the color of the entity.
@@ -123,4 +139,6 @@ public class Entity {
 	public final int getHeight() {
 		return this.height;
 	}
+
+	public final boolean getBossStage() { return this.bossStage;}
 }
