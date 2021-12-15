@@ -31,6 +31,8 @@ public class Ship extends Entity {
 	/** Time to change direction */
 	private Cooldown vibrationCooldown;
 
+	private boolean flag;
+
 	/**
 	 * Constructor, establishes the ship's properties.
 	 *
@@ -47,6 +49,7 @@ public class Ship extends Entity {
 		this.destructionCooldown = Core.getCooldown(1200);
 		this.effectCooldown = Core.getCooldown(200);
 		this.vibrationCooldown = Core.getCooldown(200);
+		this.flag = true;
 	}
 
 	/**
@@ -90,8 +93,18 @@ public class Ship extends Entity {
 			if (!this.effectCooldown.checkFinished()) { //200
 				this.spriteType = SpriteType.Explosion;
 			}
-			else
+			else {
 				this.spriteType = SpriteType.ShipDestroyed;
+				if (this.vibrationCooldown.checkFinished()) {
+					if (flag)
+						positionX += 10;
+					else
+						positionX -= 10;
+					flag = !flag;
+					this.vibrationCooldown.reset();
+				}
+
+			}
 
 		}
 		else
