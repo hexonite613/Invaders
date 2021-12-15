@@ -124,6 +124,7 @@ public final class Core {
 	private static Handler fileHandler;
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
+	private static Audio background;
 
 
 	/**
@@ -191,15 +192,17 @@ public final class Core {
 		gameSettings_Expert.add(SETTINGS_LEVEL_boss);
 
 		GameState gameState;
+		background = new Audio("bgm", true);
 
 		int returnCode = 1;
 		do {
-			gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+			gameState = new GameState(8, 0, MAX_LIVES, 0, 0);
 
 			switch (returnCode) {
 				case 1:
 					// Main menu.
 					currentScreen = new TitleScreen(width, height, FPS);
+					background.start();
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " title screen at " + FPS + " fps.");
 					returnCode = frame.setScreen(currentScreen);
@@ -222,6 +225,7 @@ public final class Core {
 						currentScreen = new GameScreen(gameState,
 								gameSettings_Default.get(gameState.getLevel() - 1),
 								bonusLife, false, width, height, FPS);
+						background.stop();
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " game screen at " + FPS + " fps.");
 						frame.setScreen(currentScreen);

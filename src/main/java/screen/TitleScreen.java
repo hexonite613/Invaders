@@ -19,6 +19,7 @@ public class TitleScreen extends Screen {
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
 
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 

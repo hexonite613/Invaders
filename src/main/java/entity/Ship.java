@@ -12,9 +12,9 @@ import java.util.Set;
 
 /**
  * Implements a ship, to be controlled by the player.
- * 
+ *
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
+ *
  */
 public class Ship extends Entity {
 
@@ -24,15 +24,21 @@ public class Ship extends Entity {
 	private static final int BULLET_SPEED = -6;
 	/** Movement of the ship for each unit of time. */
 	private static final int SPEED = 2;
-	
+
 	/** Minimum time between shots. */
 	private Cooldown shootingCooldown;
 	/** Time spent inactive between hits. */
 	private Cooldown destructionCooldown;
+	/** Time to exchange from AttackedEffect to DyingEffect. */
+	private Cooldown effectCooldown;
+	/** Time to change direction */
+	private Cooldown vibrationCooldown;
+
+	private boolean flag;
 
 	/**
 	 * Constructor, establishes the ship's properties.
-	 * 
+	 *
 	 * @param positionX
 	 *            Initial position of the ship in the X axis.
 	 * @param positionY
@@ -43,7 +49,10 @@ public class Ship extends Entity {
 
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
-		this.destructionCooldown = Core.getCooldown(1000);
+		this.destructionCooldown = Core.getCooldown(1200);
+		this.effectCooldown = Core.getCooldown(200);
+		this.vibrationCooldown = Core.getCooldown(200);
+		this.flag = true;
 	}
 
 	/**
@@ -64,7 +73,7 @@ public class Ship extends Entity {
 
 	/**
 	 * Shoots a bullet upwards.
-	 * 
+	 *
 	 * @param bullets
 	 *            List of bullets on screen, to add the new bullet.
 	 * @return Checks if the bullet was shot correctly.
@@ -83,8 +92,24 @@ public class Ship extends Entity {
 	 * Updates status of the ship.
 	 */
 	public final void update() {
-		if (!this.destructionCooldown.checkFinished())
-			this.spriteType = SpriteType.ShipDestroyed;
+		if (!this.destructionCooldown.checkFinished()) { //1200
+			if (!this.effectCooldown.checkFinished()) { //200
+				this.spriteType = SpriteType.Explosion;
+			}
+			else {
+				this.spriteType = SpriteType.ShipDestroyed;
+				if (this.vibrationCooldown.checkFinished()) {
+					if (flag)
+						positionX += 10;
+					else
+						positionX -= 10;
+					flag = !flag;
+					this.vibrationCooldown.reset();
+				}
+
+			}
+
+		}
 		else
 			this.spriteType = SpriteType.Ship;
 	}
@@ -94,11 +119,13 @@ public class Ship extends Entity {
 	 */
 	public final void destroy() {
 		this.destructionCooldown.reset();
+		this.effectCooldown.reset();
+		this.vibrationCooldown.reset();
 	}
 
 	/**
 	 * Checks if the ship is destroyed.
-	 * 
+	 *
 	 * @return True if the ship is currently destroyed.
 	 */
 	public final boolean isDestroyed() {
@@ -107,7 +134,7 @@ public class Ship extends Entity {
 
 	/**
 	 * Getter for the ship's speed.
-	 * 
+	 *
 	 * @return Speed of the ship.
 	 */
 	public final int getSpeed() {
