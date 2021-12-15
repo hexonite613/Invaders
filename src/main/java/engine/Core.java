@@ -1,6 +1,5 @@
 package engine;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
@@ -30,79 +29,82 @@ public final class Core {
 	/** Levels between extra life. */
 	private static final int EXTRA_LIFE_FRECUENCY = 3;
 	/** Total number of levels. */
-	private static final int NUM_LEVELS = 7;
+	private static final int NUM_LEVELS = 8;
 
+	/** Difficulty settings for boss. */
+	private static final GameSettings SETTINGS_LEVEL_boss =
+			new GameSettings(1, 1, 2, 500, true);
 	/**default level*/
 	/** Difficulty default settings for level 1. */
 	private static final GameSettings SETTINGS_Default_LEVEL_1 =
-			new GameSettings(5, 4, 60, 2000);
+			new GameSettings(5, 4, 60, 2000, false);
 	/** Difficulty default settings for level 2. */
 	private static final GameSettings SETTINGS_Default_LEVEL_2 =
-			new GameSettings(5, 5, 50, 2500);
+			new GameSettings(5, 5, 50, 2500, false);
 	/** Difficulty default settings for level 3. */
 	private static final GameSettings SETTINGS_Default_LEVEL_3 =
-			new GameSettings(6, 5, 40, 1500);
+			new GameSettings(6, 5, 40, 1500, false);
 	/** Difficulty default settings for level 4. */
 	private static final GameSettings SETTINGS_Default_LEVEL_4 =
-			new GameSettings(6, 6, 30, 1500);
+			new GameSettings(6, 6, 30, 1500, false);
 	/** Difficulty default settings for level 5. */
 	private static final GameSettings SETTINGS_Default_LEVEL_5 =
-			new GameSettings(7, 6, 20, 1000);
+			new GameSettings(7, 6, 20, 1000, false);
 	/** Difficulty default settings for level 6. */
 	private static final GameSettings SETTINGS_Default_LEVEL_6 =
-			new GameSettings(7, 7, 20, 1500);
+			new GameSettings(7, 7, 20, 1500, false);
 	/** Difficulty default settings for level 7. */
 	private static final GameSettings SETTINGS_Default_LEVEL_7 =
-			new GameSettings(8, 7, 20, 1300);
+			new GameSettings(8, 7, 20, 1300, false);
 
 
 	/** Hard level */
 	/** Difficulty hard settings for level 1. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_1 =
-			new GameSettings(5, 4, 30, 1500);
+			new GameSettings(5, 4, 30, 1500, false);
 	/** Difficulty hard settings for level 2. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_2 =
-			new GameSettings(5, 5, 20, 1500);
+			new GameSettings(5, 5, 20, 1500, false);
 	/** Difficulty hard settings for level 3. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_3 =
-			new GameSettings(6, 5, 15, 1000);
+			new GameSettings(6, 5, 15, 1000, false);
 	/** Difficulty hard settings for level 4. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_4 =
-			new GameSettings(6, 6, 20, 1500);
+			new GameSettings(6, 6, 20, 1500, false);
 	/** Difficulty hard settings for level 5. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_5 =
-			new GameSettings(7, 6, 20, 700);
+			new GameSettings(7, 6, 20, 700, false);
 	/** Difficulty hard settings for level 6. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_6 =
-			new GameSettings(7, 7, 10, 1000);
+			new GameSettings(7, 7, 10, 1000, false);
 	/** Difficulty hard settings for level 7. */
 	private static final GameSettings SETTINGS_Hard_LEVEL_7 =
-			new GameSettings(8, 7, 15, 1000);
+			new GameSettings(8, 7, 15, 1000, false);
 
 
 
 	/**Expert level*/
 	/** Difficulty expert settings for level 1. */
 	private static final GameSettings SETTINGS_Expert_LEVEL_1 =
-			new GameSettings(5, 4, 10, 1000);
+			new GameSettings(5, 4, 10, 1000, false);
 	/** Difficulty expert settings for level 2. */
 	private static final GameSettings SETTINGS_Expert_LEVEL_2 =
-			new GameSettings(5, 5, 10, 1000);
+			new GameSettings(5, 5, 10, 1000, false);
 	/** Difficulty expert settings for level 3. */
 	private static final GameSettings SETTINGS_Expert_LEVEL_3 =
-			new GameSettings(6, 5, 10, 700);
+			new GameSettings(6, 5, 10, 700, false);
 	/** Difficulty expert settings for level 4. */
 	private static final GameSettings SETTINGS_Expert_LEVEL_4 =
-			new GameSettings(6, 6, 15, 700);
+			new GameSettings(6, 6, 15, 700, false);
 	/** Difficulty expert settings for level 5. */
 	private static final GameSettings SETTINGS_Expert_LEVEL_5 =
-			new GameSettings(7, 6, 15, 800);
+			new GameSettings(7, 6, 15, 800, false);
 	/** Difficulty expert settings for level 6. */
 	private static final GameSettings SETTINGS_Expert_LEVEL_6 =
-			new GameSettings(7, 7, 10, 700);
+			new GameSettings(7, 7, 10, 700, false);
 	/** Difficulty expert settings for level 7. */
 	private static final GameSettings SETTINGS_Expert_LEVEL_7 =
-			new GameSettings(8, 7, 2, 500);
+			new GameSettings(8, 7, 2, 500, false);
 
 
 	/** Frame to draw the screen on. */
@@ -164,6 +166,7 @@ public final class Core {
 		gameSettings_Default.add(SETTINGS_Default_LEVEL_5);
 		gameSettings_Default.add(SETTINGS_Default_LEVEL_6);
 		gameSettings_Default.add(SETTINGS_Default_LEVEL_7);
+		gameSettings_Default.add(SETTINGS_LEVEL_boss);
 
 		/**Hard level setting*/
 		gameSettings_Hard = new ArrayList<GameSettings>();
@@ -174,6 +177,7 @@ public final class Core {
 		gameSettings_Hard.add(SETTINGS_Hard_LEVEL_5);
 		gameSettings_Hard.add(SETTINGS_Hard_LEVEL_6);
 		gameSettings_Hard.add(SETTINGS_Hard_LEVEL_7);
+		gameSettings_Hard.add(SETTINGS_LEVEL_boss);
 
 		/**Expert level setting*/
 		gameSettings_Expert = new ArrayList<GameSettings>();
@@ -184,6 +188,7 @@ public final class Core {
 		gameSettings_Expert.add(SETTINGS_Expert_LEVEL_5);
 		gameSettings_Expert.add(SETTINGS_Expert_LEVEL_6);
 		gameSettings_Expert.add(SETTINGS_Expert_LEVEL_7);
+		gameSettings_Expert.add(SETTINGS_LEVEL_boss);
 
 		GameState gameState;
 
@@ -201,16 +206,22 @@ public final class Core {
 					LOGGER.info("Closing title screen.");
 					break;
 				case 2:
+					//Game Summary & Manual
+					currentScreen=new GameSummaryScreen(width, height,FPS);
+					LOGGER.info("Starting " +WIDTH+ "x" +HEIGHT
+							+ " Game Summary screen at " +FPS+ " fps.");
+					returnCode=frame.setScreen(currentScreen);
 					// Game & score.
 					do {
 						// One extra live every few levels.
 						boolean bonusLife = gameState.getLevel()
 								% EXTRA_LIFE_FRECUENCY == 0
 								&& gameState.getLivesRemaining() < MAX_LIVES;
+						boolean bossStage = gameState.getLevel() > 7;
 
 						currentScreen = new GameScreen(gameState,
 								gameSettings_Default.get(gameState.getLevel() - 1),
-								bonusLife, width, height, FPS);
+								bonusLife, false, width, height, FPS);
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " game screen at " + FPS + " fps.");
 						frame.setScreen(currentScreen);
