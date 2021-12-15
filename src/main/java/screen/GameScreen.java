@@ -6,17 +6,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import engine.Cooldown;
-import engine.Core;
-import engine.GameSettings;
-import engine.GameState;
-
-import entity.Bullet;
-import entity.BulletPool;
-import entity.EnemyShip;
-import entity.EnemyShipFormation;
-import entity.Entity;
-import entity.Ship;
+import engine.*;
+import entity.*;
 
 /**
  * Implements the game screen, where the action happens.
@@ -77,6 +68,11 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
+	/** Audio */
+	private Audio specialAudio;
+	private Audio shootAudio;
+	private Audio explosionAudio;
+	private Audio gameOver;
 	/** Checks boss stage. */
 	private boolean bossStage;
 
@@ -149,6 +145,11 @@ public class GameScreen extends Screen {
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
 		this.inputDelay.reset();
+
+		// Load Audio file.
+		this.shootAudio = new Audio("shootAudio", false);
+		this.explosionAudio = new Audio("explosionAudio", false);
+		this.gameOver = new Audio("gameOver", false);
 	}
 
 	/**
@@ -192,8 +193,10 @@ public class GameScreen extends Screen {
 					this.ship.moveLeft();
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
-					if (this.ship.shoot(this.bullets))
+					if (this.ship.shoot(this.bullets)) {
+						this.shootAudio.start();
 						this.bulletsShot++;
+					}
 			}
 
 			if (this.enemyShipSpecial != null) {
@@ -213,6 +216,8 @@ public class GameScreen extends Screen {
 
 			if (this.enemyShipSpecial == null
 					&& this.enemyShipSpecialCooldown.checkFinished()) {
+				this.specialAudio = new Audio("specialAudio", true);
+				this.specialAudio.start();
 				this.enemyShipSpecial = new EnemyShip();
 				this.enemyShipSpecialCooldown.reset();
 				// width == 448, 처음 위치 = -32
@@ -222,6 +227,7 @@ public class GameScreen extends Screen {
 			}
 			if (this.enemyShipSpecial != null
 					&& this.enemyShipSpecial.getPositionX() > this.width) {
+				this.specialAudio.stop();
 				this.enemyShipSpecial = null;
 				this.logger.info("The special ship has escaped");
 			}
@@ -289,6 +295,7 @@ public class GameScreen extends Screen {
 		if ((this.enemyShipFormation.isEmpty() || this.lives == 0)
 				&& !this.levelFinished) {
 			this.levelFinished = true;
+			this.gameOver.start();
 			this.screenFinishedCooldown.reset();
 		}
 
@@ -347,6 +354,10 @@ public class GameScreen extends Screen {
 					bullet.getPositionY());
 
 		// Interface.
+		drawManager.drawBulletCount(this, this.bulletsShot);
+		drawManager.drawBulletCountString (this);
+		drawManager.drawScoreString(this);
+
 		drawManager.drawScore(this, this.score);
 		drawManager.drawLives(this, this.lives);
 		drawManager.drawHorizontalLine(this, (int) Math.round((SEPARATION_LINE_HEIGHT - 1) * (this.getHeight()/522f)));
@@ -392,6 +403,7 @@ public class GameScreen extends Screen {
 					recyclable.add(bullet);
 					if (!this.ship.isDestroyed()) {
 						this.ship.destroy();
+						this.explosionAudio.start();
 						if (this.bulletCode == 1) {
 							this.lives -= 2;
 							this.bulletCode = 0;
@@ -406,10 +418,18 @@ public class GameScreen extends Screen {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
 					if (!enemyShip.isDestroyed()
 							&& checkCollision(bullet, enemyShip)) {
-						this.score += enemyShip.getPointValue();
-						this.shipsDestroyed++;
-						this.enemyShipFormation.destroy(enemyShip);
-						recyclable.add(bullet);
+						if (enemyShip.getHp() == 1) {
+							this.score += enemyShip.getPointValue();
+							this.shipsDestroyed++;
+							this.enemyShipFormation.destroy(enemyShip);
+							recyclable.add(bullet);
+						}
+						else {
+							this.score += enemyShip.getPointValue();
+							recyclable.add(bullet);
+							enemyShip.hp--;
+
+						}
 					}
 				if (this.enemyShipSpecial != null
 						&& !this.enemyShipSpecial.isDestroyed()

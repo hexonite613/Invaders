@@ -1,16 +1,13 @@
 package entity;
 
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-import engine.Cooldown;
-import engine.Core;
-import engine.DrawManager;
+import engine.*;
 import engine.DrawManager.SpriteType;
-import engine.GameSettings;
-
 import screen.Screen;
 
 /**
@@ -101,7 +98,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/** Number of not destroyed ships. */
 	private int shipCount;
 
-
+	private Audio fastInvader1;
+	private Audio fastInvader2;
+	private Audio fastInvader3;
+	private Audio fastInvader4;
+	private int moveCnt;
 
 	private Map<SpriteType, boolean[][]> spriteMap;
 
@@ -144,6 +145,12 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		this.shooters = new ArrayList<EnemyShip>();
 		SpriteType spriteType;
 
+		fastInvader1 = new Audio("fastInvader1", false);
+		fastInvader2 = new Audio("fastInvader2", false);
+		fastInvader3 = new Audio("fastInvader3", false);
+		fastInvader4 = new Audio("fastInvader4", false);
+		moveCnt = 1;
+
 		this.logger.info("Initializing " + nShipsWide + "x" + nShipsHigh
 				+ " ship formation in (" + positionX + "," + positionY + ")");
 
@@ -155,19 +162,31 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			for (int i = 0; i < this.nShipsHigh; i++) {
 				if (isBoss) {
 					spriteType = SpriteType.EnemyBoss;
-					column.add(new EnemyShip(positionX, positionY, spriteType, true));
+					column.add(new EnemyShip(positionX, positionY, spriteType, 10,true));
 				} else {
-					if (i / (float) this.nShipsHigh < PROPORTION_C)
+					if (i / (float) this.nShipsHigh < PROPORTION_C) {
 						spriteType = SpriteType.EnemyShipC1;
+						column.add(new EnemyShip((SEPARATION_DISTANCE
+								* this.enemyShips.indexOf(column))
+								+ positionX, (SEPARATION_DISTANCE * i)
+								+ positionY, spriteType, 4, false));
+					}
 					else if (i / (float) this.nShipsHigh < PROPORTION_B
-							+ PROPORTION_C)
+							+ PROPORTION_C) {
 						spriteType = SpriteType.EnemyShipB1;
-					else
+						column.add(new EnemyShip((SEPARATION_DISTANCE
+								* this.enemyShips.indexOf(column))
+								+ positionX, (SEPARATION_DISTANCE * i)
+								+ positionY, spriteType, 3, false));
+					}
+					else {
 						spriteType = SpriteType.EnemyShipA1;
-					column.add(new EnemyShip((SEPARATION_DISTANCE
-							* this.enemyShips.indexOf(column))
-							+ positionX, (SEPARATION_DISTANCE * i)
-							+ positionY, spriteType));
+						column.add(new EnemyShip((SEPARATION_DISTANCE
+								* this.enemyShips.indexOf(column))
+								+ positionX, (SEPARATION_DISTANCE * i)
+								+ positionY, spriteType, 2, false));
+					}
+
 				}
 				this.shipCount++;
 			}
@@ -284,6 +303,24 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 			positionX += movementX;
 			positionY += movementY;
+			switch (moveCnt) {
+				case 1:
+					fastInvader4.start();
+					moveCnt++;
+					break;
+				case 2:
+					fastInvader1.start();
+					moveCnt++;
+					break;
+				case 3:
+					fastInvader2.start();
+					moveCnt++;
+					break;
+				case 4:
+					fastInvader3.start();
+					moveCnt = 1;
+					break;
+			}
 
 			// Cleans explosions.
 			List<EnemyShip> destroyed;

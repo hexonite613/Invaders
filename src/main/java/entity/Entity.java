@@ -26,6 +26,7 @@ public class Entity {
 	/** Sprite type assigned to the entity. */
 	protected SpriteType spriteType;
 
+	public int hp;
 	protected boolean bossStage;
 
 
@@ -139,6 +140,9 @@ public class Entity {
 	public final int getHeight() {
 		return this.height;
 	}
+
+	/**getter hp for set color*/
+	public int getHp () { return this.hp; }
 
 	public final boolean getBossStage() { return this.bossStage;}
 }

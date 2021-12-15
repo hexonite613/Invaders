@@ -1,5 +1,6 @@
 package entity;
 
+import engine.Audio;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
@@ -34,6 +35,7 @@ public class EnemyShip extends Entity {
 	/** Values of the ship, in points, when destroyed. */
 	private int pointValue;
 
+	private static final Audio invaderKilled = new Audio("invaderKilled", false);
 
 	/**
 	 * Constructor, establishes the ship's properties.
@@ -46,12 +48,19 @@ public class EnemyShip extends Entity {
 	 *            Sprite type, image corresponding to the ship.
 	 */
 	public EnemyShip(final int positionX, final int positionY,
-					 final SpriteType spriteType) {
+					 final SpriteType spriteType, int hp, final boolean bossStage) {
 		super(positionX, positionY, 12 * 2, 8 * 2, Color.WHITE);
+		if (bossStage) {
+			this.width *= 4;
+			this.height *= 4;
+		}
+
 
 		this.spriteType = spriteType;
 		this.animationCooldown = Core.getCooldown(500);
 		this.isDestroyed = false;
+		this.bossStage = bossStage;
+		this.hp = hp;
 
 		switch (this.spriteType) {
 			case EnemyShipA1:
@@ -65,6 +74,9 @@ public class EnemyShip extends Entity {
 			case EnemyShipC1:
 			case EnemyShipC2:
 				this.pointValue = C_TYPE_POINTS;
+				break;
+			case EnemyBoss:
+				this.pointValue = BOSS_TYPE_POINTS;
 				break;
 			default:
 				this.pointValue = 0;
@@ -82,18 +94,6 @@ public class EnemyShip extends Entity {
 		this.spriteType = SpriteType.EnemyShipSpecial;
 		this.isDestroyed = false;
 		this.pointValue = BONUS_TYPE_POINTS;
-	}
-
-	/** Boss */
-
-	public EnemyShip(final int positionX, final int positionY,
-					 final SpriteType spriteType, final boolean bossStage) {
-		super(30, 60, 12 * 4, 8 * 4, Color.RED, true);
-
-		this.spriteType = SpriteType.EnemyBoss;
-		this.animationCooldown = Core.getCooldown(100);
-		this.isDestroyed = false;
-		this.pointValue = BOSS_TYPE_POINTS;
 	}
 
 	/**
@@ -156,6 +156,7 @@ public class EnemyShip extends Entity {
 	public final void destroy() {
 		this.isDestroyed = true;
 		this.spriteType = SpriteType.Explosion;
+		invaderKilled.start();
 	}
 
 	/**
