@@ -1,8 +1,9 @@
 package entity;
 
-import java.awt.Color;
 
 import engine.DrawManager.SpriteType;
+
+import java.awt.*;
 
 /**
  * Implements a generic game entity.
@@ -64,7 +65,6 @@ public class Entity {
 		this.color = color;
 		this.bossStage = bossStage;
 	}
-
 
 	/**
 	 * Getter for the color of the entity.
@@ -140,5 +140,5 @@ public class Entity {
 		return this.height;
 	}
 
-	public final boolean getBossSgate() { return this.bossStage;}
+	public final boolean getBossStage() { return this.bossStage;}
 }

@@ -1,11 +1,14 @@
 package entity;
 
-import java.awt.Color;
-import java.util.Set;
 
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+import entity.Bullet;
+import entity.BulletPool;
+
+import java.awt.*;
+import java.util.Set;
 
 /**
  * Implements a ship, to be controlled by the player.

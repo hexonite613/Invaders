@@ -1,38 +1,43 @@
 package engine;
 
-import java.awt.Insets;
+import java.awt.*;
 
 import javax.swing.JFrame;
 
 import screen.Screen;
 
+
+
 /**
  * Implements a frame to show screens on.
- * 
+ *
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
 
-	/** Frame width. */
+	/**
+	 * Frame width.
+	 */
 	private int width;
-	/** Frame height. */
+	/**
+	 * Frame height.
+	 */
 	private int height;
-	/** Screen currently shown. */
+	/**
+	 * Screen currently shown.
+	 */
 	private Screen currentScreen;
-
 	/**
 	 * Initializes the new frame.
-	 * 
-	 * @param width
-	 *            Frame width.
-	 * @param height
-	 *            Frame height.
+	 *
+	 * @param width      Frame width.
+	 * @param height     Frame height.
 	 */
 	public Frame(final int width, final int height) {
 		setSize(width, height);
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setLocationRelativeTo(null);
@@ -41,6 +46,7 @@ public class Frame extends JFrame {
 		Insets insets = getInsets();
 		this.width = width - insets.left - insets.right;
 		this.height = height - insets.top + insets.bottom;
+		System.out.println("frame : " + this.width + " x " + this.height);
 		setTitle("Invaders");
 
 		addKeyListener(Core.getInputManager());
@@ -48,9 +54,8 @@ public class Frame extends JFrame {
 
 	/**
 	 * Sets current screen.
-	 * 
-	 * @param screen
-	 *            Screen to show.
+	 *
+	 * @param screen Screen to show.
 	 * @return Return code of the finished screen.
 	 */
 	public final int setScreen(final Screen screen) {
@@ -61,7 +66,7 @@ public class Frame extends JFrame {
 
 	/**
 	 * Getter for frame width.
-	 * 
+	 *
 	 * @return Frame width.
 	 */
 	public final int getWidth() {
@@ -70,11 +75,37 @@ public class Frame extends JFrame {
 
 	/**
 	 * Getter for frame height.
-	 * 
+	 *
 	 * @return Frame height.
 	 */
 
 	public final int getHeight() {
 		return this.height;
 	}
+
+	/**
+	 * Setter for frame proportion.
+	 *
+	 */
+
+	public final void resizingScreen() {
+		this.getGraphics().setColor(Color.BLACK);
+
+		Dimension frame_size;
+		frame_size = this.size();
+
+		this.width = frame_size.width;
+		this.height = frame_size.height;
+
+		setLocationRelativeTo(null);
+
+		Insets insets = getInsets();
+		this.width = (int) Math.round(this.height * 0.8657) - insets.left - insets.right;
+		this.height = this.height - insets.top + insets.bottom;
+
+		DrawManager.getInstance().setFrame(this);
+		DrawManager.getInstance().setFont(this);
+	}
+
+
 }

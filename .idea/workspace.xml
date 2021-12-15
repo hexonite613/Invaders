@@ -5,22 +5,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce7ea9d1-6123-4ccb-8961-b639dfb3e6aa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/graphics" beforeDir="false" afterPath="$PROJECT_DIR$/res/graphics" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/DrawManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/DrawManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/GameSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/GameSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/BulletPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/BulletPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/EnemyShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/EnemyShip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/EnemyShipFormation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/EnemyShipFormation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screen/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/GameScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/engine/Core.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/screen/DifficultyScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/screen/SettingScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/screen/WindowSettingScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resource/graphics" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resource/scores" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/graphics" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/graphics" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/scores" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scores" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Cooldown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/Cooldown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Core.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/DrawManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/GameSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/GameSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/InputManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/MinimalFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/MinimalFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/Score.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/BulletPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/BulletPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/EnemyShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/EnemyShip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/EnemyShipFormation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Ship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/engine/DrawManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/DrawManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/EnemyShipFormation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/EnemyShipFormation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/screen/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/screen/GameScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screen/GameScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screen/GameSummaryScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/screen/GameSummaryScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screen/HighScoreScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/screen/HighScoreScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screen/ScoreScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/screen/ScoreScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screen/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/screen/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screen/TitleScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/screen/TitleScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/engine/Bosstest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/screen/GameSummaryTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +82,18 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Invaders_teamC" type="f1a62948:ProjectNode" />
+                <item name="Invaders" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Invaders" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Invaders" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -76,7 +126,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/production/Invaders_teamC" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -89,15 +139,26 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\Invaders\src\main\resources" />
+      <recent name="D:\workspace\Invaders\src\test\java\screen" />
+      <recent name="D:\workspace\Invaders\src\test\java\engine" />
+      <recent name="D:\workspace\Invaders\src\main\java\screen" />
       <recent name="$PROJECT_DIR$/out/production/Invaders_teamC" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle clean" />
+      <command value="gradle build" />
+      <command value="gradle clean build" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Core">
     <configuration name="Core" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="engine.Core" />
-      <module name="Invaders_teamC" />
+      <module name="Invaders.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="engine.*" />
@@ -108,22 +169,98 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Invaders" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="Invaders [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Invaders" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="Invaders [clean build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Invaders [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Invaders [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Core" />
+        <item itemvalue="Gradle.Invaders [clean build]" />
+        <item itemvalue="Gradle.Invaders [test]" />
+        <item itemvalue="Gradle.Invaders [build]" />
+        <item itemvalue="Gradle.Invaders [clean]" />
       </list>
     </recent_temporary>
   </component>
@@ -136,6 +273,7 @@
       <option name="presentableId" value="Default" />
       <updated>1638767253315</updated>
       <workItem from="1638767256624" duration="1751000" />
+      <workItem from="1639506489816" duration="7729000" />
     </task>
     <servers />
   </component>

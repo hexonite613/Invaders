@@ -5,14 +5,13 @@ import java.util.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-import screen.Screen;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager;
 import engine.DrawManager.SpriteType;
 import engine.GameSettings;
-import java.util.HashMap;
-import java.util.Map;
+
+import screen.Screen;
 
 /**
  * Groups enemy ships into a formation that moves together.
@@ -174,14 +173,14 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 		}
 
-		this.shipWidth = this.enemyShips.get(0).get(0).getWidth();
+		this.shipWidth = this.enemyShips.get(0).get(0).getWidth() ;
 		this.shipHeight = this.enemyShips.get(0).get(0).getHeight();
 
 		this.width = (this.nShipsWide - 1) * SEPARATION_DISTANCE
 				+ this.shipWidth;
 		this.height = (this.nShipsHigh - 1) * SEPARATION_DISTANCE
 				+ this.shipHeight;
-
+		System.out.println(this.width + " , " + this.height);
 		for (List<EnemyShip> column : this.enemyShips)
 			this.shooters.add(column.get(column.size() - 1));
 	}
@@ -238,9 +237,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			movementInterval = 0;
 
 			boolean isAtBottom = positionY
-					+ this.height > screen.getHeight() - BOTTOM_MARGIN;
+					+ this.height > 497 - BOTTOM_MARGIN;
 			boolean isAtRightSide = positionX
-					+ this.width >= screen.getWidth() - SIDE_MARGIN;
+					+ this.width >= 434 - SIDE_MARGIN;
+
 			boolean isAtLeftSide = positionX <= SIDE_MARGIN;
 			boolean isAtHorizontalAltitude = positionY % DESCENT_DISTANCE == 0;
 
@@ -368,11 +368,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			this.shootingCooldown.reset();
 			if (shooter.getSpriteType().toString() == "EnemyBoss") {
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 3, Color.red));
+						+ shooter.width / 2, shooter.getPositionY() + shooter.height / 2, BULLET_SPEED * 2, Color.red));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2 - 100, shooter.getPositionY(), BULLET_SPEED * 3, Color.red));
+						+ shooter.width / 3, shooter.getPositionY() + shooter.height / 2, BULLET_SPEED * 2, Color.red));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2 + 100, shooter.getPositionY(), BULLET_SPEED * 3, Color.red));
+						+ shooter.width * 2 / 3, shooter.getPositionY() + shooter.height / 2, BULLET_SPEED * 2, Color.red));
 			}
 			else if (shooter.getSpriteType().toString() == "EnemyShipA1" || shooter.getSpriteType().toString() == "EnemyShipA2") {
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()

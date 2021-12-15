@@ -1,10 +1,11 @@
 package entity;
 
-import java.awt.Color;
-
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+
+import java.awt.*;
+
 
 /**
  * Implements a enemy ship, to be destroyed by the player.
@@ -87,7 +88,7 @@ public class EnemyShip extends Entity {
 
 	public EnemyShip(final int positionX, final int positionY,
 					 final SpriteType spriteType, final boolean bossStage) {
-		super(30, 60, 290, 8 * 8, Color.RED, true);
+		super(30, 60, 12 * 4, 8 * 4, Color.RED, true);
 
 		this.spriteType = SpriteType.EnemyBoss;
 		this.animationCooldown = Core.getCooldown(100);
