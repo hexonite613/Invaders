@@ -13,10 +13,10 @@ public class Audio {
 
     public Audio(String name, boolean isLoop) {
         try {
-            pathName = Audio.class.getResource("").getPath().replace("classes/java/main/engine/", "resources/main/audio/") + name + ".wav";
-            System.out.println(pathName);
+            pathName = Audio.class.getResource("").getPath().replace("/engine/", "/") + name + ".wav";
             clip = AudioSystem.getClip();
-            audioFile = new File(pathName);
+            audioFile = new File(System.getProperty("user.dir") + "/sound/" + name + ".wav");
+            System.out.println(System.getProperty("user.dir"));
             audioInputStream = AudioSystem.getAudioInputStream(audioFile);
             clip.open(audioInputStream);
         } catch (LineUnavailableException e) {
