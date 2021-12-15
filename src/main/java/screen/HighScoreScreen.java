@@ -1,11 +1,11 @@
 package screen;
 
-import engine.Core;
-import engine.Score;
-
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.List;
+
+import engine.Core;
+import engine.Score;
 
 /**
  * Implements the high scores screen, it shows player records.
@@ -58,6 +58,7 @@ public class HighScoreScreen extends Screen {
 		super.update();
 
 		draw();
+
 		if (inputManager.isKeyDown(KeyEvent.VK_SPACE)
 				&& this.inputDelay.checkFinished())
 			this.isRunning = false;

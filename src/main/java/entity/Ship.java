@@ -1,8 +1,11 @@
 package entity;
 
+
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+import entity.Bullet;
+import entity.BulletPool;
 
 import java.awt.*;
 import java.util.Set;
@@ -79,7 +82,7 @@ public class Ship extends Entity {
 		if (this.shootingCooldown.checkFinished()) {
 			this.shootingCooldown.reset();
 			bullets.add(BulletPool.getBullet(positionX + this.width / 2,
-					positionY, BULLET_SPEED));
+					positionY, BULLET_SPEED, Color.white));
 			return true;
 		}
 		return false;
